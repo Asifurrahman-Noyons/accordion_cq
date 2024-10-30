@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .circle {
+            width: 24px; /* Size of the circle */
+            height: 24px; /* Size of the circle */
+            border-radius: 50%; /* Circular shape */
+            background-color: #4A90E2; /* Circle background color */
+            color: white; /* Text color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 8px; /* Space between circle and text */
+        }
+        .answer-label {
+            font-weight: bold;
+            color: #4A90E2; /* Color for "Answer" text */
+            margin-bottom: 4px; /* Space below the label */
+        }
+        .accordion-title {
+            text-align: left; /* Align title text to the left */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div id="accordion-container" class="max-w-md mx-auto mt-10"></div>
+
+    <script>
+        // Sample data for the accordion titles and content
+        const accordionData = [
+            {
+                title: "Material Tailwind Overview",
+                items: [
+                    {
+                        title: "What is Material Tailwind?",
+                        content: "Material Tailwind is a framework that enhances Tailwind CSS with additional styles and components."
+                    },
+                    {
+                        title: "How to use Material Tailwind?",
+                        content: "You can use Material Tailwind by importing its components into your Tailwind CSS project."
+                    },
+                    {
+                        title: "What can I do with Material Tailwind?",
+                        content: "Material Tailwind allows you to quickly build modern, responsive websites with a focus on design."
+                    },
+                    {
+                        title: "Why use Material Tailwind?",
+                        content: "It provides a set of pre-designed components that save you time and effort in development."
+                    },
+                ]
+            },
+            {
+                title: "Another Topic Overview",
+                items: [
+                    {
+                        title: "What is Topic X?",
+                        content: "Topic X is an essential part of understanding the framework."
+                    },
+                    {
+                        title: "How to implement Topic X?",
+                        content: "You can implement Topic X by following the documentation."
+                    },
+                    {
+                        title: "Benefits of Topic X",
+                        content: "Topic X provides various benefits, including increased efficiency."
+                    },
+                    {
+                        title: "Common challenges with Topic X",
+                        content: "Some challenges may arise, but solutions are available in the community."
+                    },
+                ]
+            },
+        ];
+
+        // Create the accordion card
+        function createAccordionCard(title, items) {
+            const card = document.createElement('div');
+            card.className = 'border rounded-lg shadow-lg p-5 mb-5 bg-white';
+
+            const cardTitle = document.createElement('h2');
+            cardTitle.className = 'accordion-title text-xl font-bold mb-3'; // Added class for left alignment
+            cardTitle.textContent = title;
+
+            const accordion = document.createElement('div');
+
+            items.forEach((item, index) => {
+                const accordionItem = document.createElement('div');
+                accordionItem.className = 'border-b border-slate-200';
+
+                const button = document.createElement('button');
+                button.className = 'w-full flex items-center py-5 text-slate-800 justify-start'; // Change to justify-start
+                button.onclick = () => toggleAccordion(index, title); // Passing the index and title
+
+                const labelCircle = document.createElement('div');
+                labelCircle.className = 'circle';
+                labelCircle.textContent = String.fromCharCode(97 + index); // Set the circle label (a, b, c, d)
+
+                const buttonText = document.createElement('span');
+                buttonText.className = 'ml-1'; // Remove extra margin
+                buttonText.textContent = item.title;
+
+                const icon = document.createElement('span');
+                icon.id = `icon-${title}-${index}`; // Unique ID for icons
+                icon.className = 'text-slate-800 transition-transform duration-300 ml-auto'; // Align icon to the right
+                icon.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+                    </svg>
+                `;
+
+                button.appendChild(labelCircle);
+                button.appendChild(buttonText);
+                button.appendChild(icon);
+                accordionItem.appendChild(button);
+
+                const content = document.createElement('div');
+                content.id = `content-${title}-${index}`; // Unique ID for each content div
+                content.className = 'max-h-0 overflow-hidden transition-all duration-300 ease-in-out';
+
+                // Adding "Answer" label to the content area
+                const answerLabel = document.createElement('div');
+                answerLabel.className = 'answer-label';
+                answerLabel.textContent = 'Answer'; // "Answer" text
+
+                // Setting inner HTML with the answer label and content
+                content.innerHTML = `<div class="pb-5 text-sm text-slate-500">${answerLabel.outerHTML}${item.content}</div>`;
+
+                accordionItem.appendChild(content);
+                accordion.appendChild(accordionItem);
+            });
+
+            card.appendChild(cardTitle);
+            card.appendChild(accordion);
+            return card;
+        }
+
+        // Function to toggle accordion
+        function toggleAccordion(index, title) {
+            const content = document.getElementById(`content-${title}-${index}`);
+            const icon = document.getElementById(`icon-${title}-${index}`);
+
+            const downSVG = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                    <path fill-rule="evenodd" d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
+                </svg>
+            `;
+
+            const upSVG = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4">
+                    <path fill-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                </svg>
+            `;
+
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0';
+                icon.innerHTML = downSVG;
+            } else {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.innerHTML = upSVG;
+            }
+        }
+
+        // Create and append the accordion cards to the container
+        accordionData.forEach(data => {
+            const accordionCard = createAccordionCard(data.title, data.items);
+            document.getElementById('accordion-container').appendChild(accordionCard);
+        });
+    </script>
+</body>
+</html>

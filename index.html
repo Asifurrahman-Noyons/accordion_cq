@@ -32,52 +32,36 @@
 
     <div id="accordion-container" class="max-w-md mx-auto mt-10"></div>
 
+
+
+
+    
     <script>
         // Sample data for the accordion titles and content
-        const accordionData = [
+      const accordionData = [
+    {
+        title: "উদ্দীপক প্রশ্ন",
+        items: [
             {
-                title: "Material Tailwind Overview",
-                items: [
-                    {
-                        title: "What is Material Tailwind?",
-                        content: "Material Tailwind is a framework that enhances Tailwind CSS with additional styles and components."
-                    },
-                    {
-                        title: "How to use Material Tailwind?",
-                        content: "You can use Material Tailwind by importing its components into your Tailwind CSS project."
-                    },
-                    {
-                        title: "What can I do with Material Tailwind?",
-                        content: "Material Tailwind allows you to quickly build modern, responsive websites with a focus on design."
-                    },
-                    {
-                        title: "Why use Material Tailwind?",
-                        content: "It provides a set of pre-designed components that save you time and effort in development."
-                    },
-                ]
+                title: "অটোফ্যাগী কী?",
+                content: "প্রতিকূল পরিবেশে অর্থাৎ তীব্র খাদ্যাভাবের সময় বা ক্ষতিগ্রস্ত অবস্থায় লাইসোসোমের এনজাইম মুক্ত হয়ে কোষের অন্যান্য অঙ্গাণুকে বিনষ্ট করার প্রক্রিয়াকে অটোফ্যাগী বা স্বগ্রাস বলে।"
             },
             {
-                title: "Another Topic Overview",
-                items: [
-                    {
-                        title: "What is Topic X?",
-                        content: "Topic X is an essential part of understanding the framework."
-                    },
-                    {
-                        title: "How to implement Topic X?",
-                        content: "You can implement Topic X by following the documentation."
-                    },
-                    {
-                        title: "Benefits of Topic X",
-                        content: "Topic X provides various benefits, including increased efficiency."
-                    },
-                    {
-                        title: "Common challenges with Topic X",
-                        content: "Some challenges may arise, but solutions are available in the community."
-                    },
-                ]
+                title: "রাইবোসোমকে সর্বজনীন অঙ্গাণু বলা হয় কেন?",
+                content: "ঝিল্লীবিহীন যে কোষীয় অঙ্গাণুতে প্রোটিন সংশ্লেষণ হয় তাকে রাইবোসোম বলে। সকল সজীব কোষে রাইবোসোম থাকে। তবে আদিকোষ ও প্রকৃত কোষে উপস্থিত থাকার কারণেই রাইবোসোমকে সর্বজনীন অঙ্গাণু বলা হয়। আদিকোষে 70 S ও প্রকৃতকোষে 80S ধরনের রাইবোসোম থাকে।"
             },
-        ];
+            {
+                title: "উদ্দীপকের ২য় অঙ্গাণুটির গঠন চিত্রসহ লেখ।",
+                content: "উদ্দীপকের ২য় অঙ্গাণুটি হলো গলজি বডি। এটি কোষের ট্রাফিক পুলিশ হিসেবে পরিচিত। গলজি বডির গঠন চিত্র:\n\n১. সিস্টারনি: অসমান দৈর্ঘ্য বিশিষ্ট ও সমান্তরালভাবে অবস্থিত লম্বা ও চ্যাপ্টা নালিকা সদৃশ বস্তুগুলো সিস্টারনি নামে পরিচিত।\n২. ভ্যাকুওল: সিস্টারনির কাছে অবস্থিত গোলাকৃতির থলির মতো অংশগুলোকে ভ্যাকুওল বলে।\n৩. ভেসিকল: সিস্টারনির নিচের দিকে অপেক্ষাকৃত ক্ষুদ্র ক্ষুদ্র থলির মতো বস্তুগুলোকে ভেসিকল বলে।"
+            },
+            {
+                title: "উদ্দীপকের ১ম অঙ্গাণুটির গুরুত্ব বিশ্লেষণ কর।",
+                content: "উদ্দীপকের ১ম অঙ্গাণুটি হলো মাইটোকন্ড্রিয়া। এটি কোষের শক্তিঘর হিসেবে পরিচিত।\n\n১. কোষের যাবতীয় কাজের জন্য শক্তি উৎপাদন ও নিয়ন্ত্রণ করে।\n২. শ্বসন ও প্রোটিন সংশ্লেষণের জন্য প্রয়োজনীয় এনজাইম ধারণ করে।\n৩. গ্লাইকোলাইসিস ছাড়া শ্বসনের বিভিন্ন গুরুত্বপূর্ণ পর্যায় যেমন- ক্রেবস চক্র, ETS সম্পন্ন করে।\n৪. ADP থেকে ATP অণুর সংশ্লেষ করে।"
+            }
+        ]
+    },
+    // Other topics can go here as separate accordion sections if needed.
+];
 
         // Create the accordion card
         function createAccordionCard(title, items) {
